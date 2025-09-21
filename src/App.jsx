@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 
+export const serverURL = "http://localhost:8000"
+
 const App = () => {
   return (
     <>
