@@ -4,10 +4,13 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import { Provider } from 'react-redux'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+  {/* <Provider store={store}> */}
     <App />
     <ToastContainer position="top-center" autoClose={2000} />
+    {/* </Provider> */}
   </BrowserRouter>,
 )

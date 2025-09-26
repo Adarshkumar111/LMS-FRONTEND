@@ -5,14 +5,17 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Api from "../utils/Api"; // yaha pe apni axios wali file ka path lagana
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loding, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault(); // form reload hone se rokega
     try {
       const res = await Api.post("/api/v1/auth/login", {
@@ -21,9 +24,11 @@ const Login = () => {
       });
 
       toast.success(res.data?.message || "Login successful 🎉");
+      setLoading(false);
       navigate("/"); // login ke baad home ya dashboard pe bhejna
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed ❌");
+      setLoading(false);
       console.error(error.response?.data || error.message);
     }
   };
@@ -86,9 +91,9 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]"
+            className="w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]" disabled={loding}
           >
-            Login
+            {loding ? <ClipLoader size={30} color="white" /> : "Login"}
           </button>
 
           <span className="text-[13px] cursor-pointer text-[#585757]">
