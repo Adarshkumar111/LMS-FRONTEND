@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Api from "../utils/Api"; // <-- yaha se axios instance import kiya
 import { toast } from "react-toastify"; // <-- toast import kiya
 import { ClipLoader } from "react-spinners"; // ✅
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
@@ -15,6 +17,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
   const [loding, setLoading] = useState(false);
+  const dispatch=useDispatch()
 
   const handleSignup = async (e) => {
     setLoading(true);
@@ -25,8 +28,9 @@ const Signup = () => {
         email,
         password,
         role,
-      });
-      console.log(res.data);
+      } ,{ withCredentials: true }); // <-- yaha pe axios instance use kiya  
+      dispatch(setUserData(res.data))
+      
       toast.success(res.data.message || "Signup successful ✅");
       setLoading(false);
       navigate("/"); // signup ke baad login page par bhejna

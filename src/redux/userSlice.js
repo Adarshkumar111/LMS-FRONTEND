@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
+// import User from '../../../backend/models/user.model';
 
 const userSlice= createSlice({
-    name:user,
+    name:"user",
     initialState:{
         userData:null
     },
