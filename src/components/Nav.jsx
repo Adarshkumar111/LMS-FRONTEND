@@ -19,7 +19,7 @@ const Nav = () => {
 
   const handleLogout = async () => {
     try {
-      const result = await Api.post("/api/v1/auth/logout", {
+      const result = await Api.get("/api/v1/auth/logout", {
         withCredentials: true,
       });
       dispatch(setUserData(null));
